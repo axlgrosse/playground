@@ -18,7 +18,14 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- script: |
-      docker pull 42crunch/scand-agent:2.0.1
-      docker run -e SCAN_TOKEN=CAN_TOKEN=scan_81e7c8c6-0e05-47ba-907d-7cac374e3e4a 42crunch/scand-agent:2.0.1
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Public Docker Hub'
+    repository: '42Crunch'
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+
+- task: CmdLine@2
+  inputs:
+    script: 'docker run -e SCAN_TOKEN=CAN_TOKEN=scan_81e7c8c6-0e05-47ba-907d-7cac374e3e4a 42crunch/scand-agent:2.0.1'
   displayName: 'run scan'
