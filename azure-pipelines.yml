@@ -21,9 +21,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'Public Docker Hub'
-    repository: '42Crunch'
-    command: 'start'
-    Dockerfile: '**/Dockerfile'
+    command: 'login'
 
 - task: CmdLine@2
   inputs:
